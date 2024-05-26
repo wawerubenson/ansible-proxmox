@@ -26,14 +26,14 @@
   - name: add ssh-key for simeone
     tags: always
     authorized_key:
-      user: simeone
+      user: benson
       key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8peSA3UkgF0M9WFAg5Km7P3cNmMn7Ok08276goFEjb ansible"
   
-  - name: add sudoers file for simeone
+  - name: add sudoers file for benson
     tags: always
     copy:
-      src: sudoer_simeone
-      dest: /etc/sudoers.d/simeone
+      src: sudoer_benson
+      dest: /etc/sudoers.d/benson
       owner: root
       group: root
       mode: 0440
