@@ -1,0 +1,46 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+  - name: install updates (CentOS)
+    tags: always
+    yum:
+      update_only: yes
+      update_cache: yes
+    when: ansible_distribution == "CentOS"
+
+  - name: install updates (Ubuntu)
+  
+    tags: always
+    apt:
+      upgrade: dist
+      update_cache: yes
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: add ssh-key for simeone
+    tags: always
+    authorized_key:
+      user: simeone
+      key: "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIF8peSA3UkgF0M9WFAg5Km7P3cNmMn7Ok08276goFEjb ansible"
+  
+  - name: add sudoers file for simeone
+    tags: always
+    copy:
+      src: sudoer_simeone
+      dest: /etc/sudoers.d/simeone
+      owner: root
+      group: root
+      mode: 0440
+
+
+
+
+
+
+
